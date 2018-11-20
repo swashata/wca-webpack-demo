@@ -44,10 +44,7 @@ module.exports = {
 								},
 							],
 						],
-						plugins: [
-							'@babel/plugin-proposal-class-properties',
-							'react-hot-loader/babel',
-						],
+						plugins: ['@babel/plugin-proposal-class-properties'],
 						// 💡  disable loading config and babelrc files
 						// to prevent conflict from tools like jest.
 						// although you should figure out using

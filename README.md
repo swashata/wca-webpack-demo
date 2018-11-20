@@ -40,7 +40,23 @@ To check how Hot Module Replacement works, start the development server
 and make changes to `src/components/TodoApp/*` files. Your changes will be
 shown live on the browser.
 
-Under the hood, this demo uses [react-hot-loader](https://github.com/gaearon/react-hot-loader)
-to facilitate HMR.
+Under the hood this demo uses a simple re-render of the react app
+component to facilitate HMR.
+
+```js
+// Render our application
+document.addEventListener('DOMContentLoaded', () => {
+	ReactDOM.render(<TodoApp />, document.querySelector('#app'));
+
+	// Let's Hot Module Replace the main TodoApp component
+	// module.hot is provided by WebPack
+	if (module.hot) {
+		module.hot.accept('./components/TodoApp', () => {
+			const NewTodoApp = require('./components/TodoApp').default;
+			ReactDOM.render(<NewTodoApp />, document.querySelector('#app'));
+		});
+	}
+});
+```
 
 HMR for CSS is driven by webpack's own css-loader.
